@@ -158,7 +158,6 @@ namespace AgarioServer.Game
                     // Pega tudo que está dentro do raio de visão 1200,
                     // futuramente seria bom realizar o calculo pelo tamanho da celula
                     packet.AddClients(clients
-                        .AsParallel()
                         .Where(c =>
                             c.Position.X < xRigth + 1200 && c.Position.Y < yTop + 1200 &&    // Primeiro quadrante
                             c.Position.X > xLeft - 1200  && c.Position.Y < yTop + 1200 &&    // Segundo quadrante
@@ -243,9 +242,10 @@ namespace AgarioServer.Game
         public async void SendToAllClients(Byte[] data)
         {
             List<Client> clientes = new List<Client>(this.Clients);
-            clientes.AsParallel()
-                .Where(c => c.Type == ClientType.Cell)
-                .ForAll(c => c.Send(data));
+            foreach(Cell cell in clientes.OfType<Cell>())
+            {
+                cell.Send(data);
+            }
         }
 
         /// <summary>

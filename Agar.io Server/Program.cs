@@ -25,6 +25,10 @@ namespace AgarioServer
             Log.Info("Loading settings");
             Config.Load();
 
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => {
+                Log.Fatal(e.ExceptionObject.ToString());
+            };
+
             Log.Info("Connecting to database");
             Database.Instance.Connect();
 

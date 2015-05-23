@@ -9,12 +9,11 @@ namespace AgarioServer.Game
 {
     public static class Log
     {
-        private static String INFO = "INFO";
-        private static String WARNING = "WARNING";
-        private static String ERROR = "ERROR";
-        private static String FATAL = "FATAL";
-        private static String DEBUG = "DEBUG";
-        private static StreamWriter _sw = File.AppendText("log.txt");
+        private const String INFO = "INFO";
+        private const String WARNING = "WARNING";
+        private const String ERROR = "ERROR";
+        private const String FATAL = "FATAL";
+        private const String DEBUG = "DEBUG";
 
         public static void Fatal(String message)
         {
@@ -50,18 +49,17 @@ namespace AgarioServer.Game
 
         private static void WriteEntry(String level, String message)
         {
-            String log = String.Format("[{0}] {1} - {2}",
+            String log = String.Format("[{0}] {1} - {2}" + Environment.NewLine,
                 DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                 level,
                 message
             );
-            Console.WriteLine(log);
-            Log._sw.WriteLine(log);
-        }
+            Console.Write(log);
 
-        internal static void Info()
-        {
-            throw new NotImplementedException();
+            if (!File.Exists("log.txt"))
+                File.WriteAllText("log.txt", log);
+            else
+                File.AppendAllText("log.txt", log);
         }
     }
 }

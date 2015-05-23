@@ -1,4 +1,13 @@
-﻿0.1.4 Beta / 2015-05-21
+﻿0.1.6 Beta / 2015-05-22
+==================
+* Velocidade das celulas foi reduzida
+
+0.1.5 Beta / 2015-05-22
+==================
+* O paralelismo foi removido da movimentação dos jogadores para conter erros
+* O log foi corrigido
+
+0.1.4 Beta / 2015-05-21
 ==================
 * O Virus pode ser alimentado e se dividir
 * Corrigido erro ao atualizar a quantidade de jogadores ficar negativo

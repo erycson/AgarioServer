@@ -34,7 +34,7 @@ namespace AgarioServer.Game.Clients
             this._socket.OnRecv += OnRecv;
             this._socket.OnDisconnect += OnDisconnect;
 
-            this._timer = new Timer(1000/30);
+            this._timer = new Timer(1000/Config.IntervalPosition);
             this._timer.Elapsed += CalculateMovement;
 
             Random rdm = new Random();
@@ -55,11 +55,11 @@ namespace AgarioServer.Game.Clients
             this._socket.OnRecv += OnRecv;
             this._socket.OnDisconnect += OnDisconnect;
 
-            this._timerSalt = new Timer(1000 / 30);
+            this._timerSalt = new Timer(1000 / Config.IntervalPosition);
             this._timerSalt.Elapsed += MoveCell;
             this._timerSalt.Start();
 
-            this._timer = new Timer(1000 / 30);
+            this._timer = new Timer(1000 / Config.IntervalPosition);
             this._timer.Elapsed += CalculateMovement;
 
             this.Connected = true;
@@ -116,6 +116,7 @@ namespace AgarioServer.Game.Clients
             {
                 //this._socket.Disconnect();
                 this.Send(new Packet20().ToByteArray());
+                this.Send(new Packet32().SetId(0).ToByteArray());
 
                 if (this.Connected)
                 {
@@ -224,7 +225,7 @@ namespace AgarioServer.Game.Clients
         /// <param name="e"></param>
         private void CalculateMovement(object sender, ElapsedEventArgs e)
         {
-            Double speed = 23 * Math.Pow(1 / 1.001, this.Size);
+            Double speed = 15 * Math.Pow(1 / 1.001, this.Size);
             this.Position = this.Position + this.Direction * speed;
             Single radius = this.Size * 0.6f;
 
@@ -280,18 +281,17 @@ namespace AgarioServer.Game.Clients
                          }
                          else
                          {
-                             Vector direction = this.Position - c.Position;
-                             if (direction.Length < this.Size + c.Size)
+                             if (this.InsideClient(c.Position))
                              {
-                                 direction = this.Direction;
+                                 Vector direction = this.Position - c.Position;
                                  direction.Negate();
-                                 this.Position = this.Position + direction * speed;
+                                 direction.Normalize();
+                                 this.Position = this.Position - direction * (this.Size + c.Size - direction.Length);
                              }
                          }
                      }
                  }
             }
         }
-
     }
 }

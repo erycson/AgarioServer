@@ -15,9 +15,10 @@ namespace AgarioServer.Game.Packet
         public Packet32() : base(32)
         { }
 
-        public void SetId(UInt32 id)
+        public Packet32 SetId(UInt32 id)
         {
             this.Writer.Write(id);
+            return this;
         }
     }
 }

@@ -5,8 +5,15 @@
 
 Fontes
 ==================
+Client
 * https://github.com/DnAp/Agar.io-Reverse-Engineering/blob/master/main_out.js
 * https://github.com/Snowl/Petri/tree/master/src
+Server
+* https://github.com/forairan/Ogar (NodeJS)
+* https://github.com/rnplus/agar.io-private-server (C++)
+Other
+* https://www.reddit.com/r/Agario/comments/34x2fa/game_mechanics_explained_in_depth_numbers_and/
+* http://www.reddit.com/r/Agario/comments/36pjpn/frequently_asked_questions_answered/
 
 Versão
 ==================
@@ -15,9 +22,7 @@ Versão
 
 Erros
 ==================
-* As vezes a celula consegue sair do reino
-* Algumas comidas são criadas fora do reino
-* De vez enquando está havendo uma travada no cliente
+* Alguns pequenos erros
 
 Implementar
 ==================

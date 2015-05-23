@@ -20,7 +20,7 @@
   </realm>
   <interval>
     <!-- FPS: 1000/postion -->
-    <position>23</position>
+    <position>18</position>
     <!-- Seconds -->
     <food>60</food>
     <!-- Seconds -->
